@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -16,11 +17,28 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
+    @BeforeClass
+    public static void beforeClass() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        TwitterSearch.init(context);
+    }
+
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.github.applicaster.twitter.test", appContext.getPackageName());
+    }
+
+    @Test
+    public void searchNone() {
+        // TODO implement me!
+    }
+
+    @Test
+    public void searchHello() {
+        // TODO implement me!
     }
 }
