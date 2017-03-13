@@ -7,7 +7,7 @@
         android:label="@string/app_name">
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="${twitterKey}"/>
+            android:value="bbc03acd2e0faf9ebd32a56f43d0335f4c37e21b"/>
     </application>
 
 </manifest>
