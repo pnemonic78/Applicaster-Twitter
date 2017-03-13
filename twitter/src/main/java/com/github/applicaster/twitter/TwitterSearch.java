@@ -7,15 +7,13 @@ import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.models.Search;
-import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.SearchService;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -57,22 +55,17 @@ public class TwitterSearch {
         if (service != null) {
             Call<Search> call = service.tweets(query, null, null, Locale.getDefault().toString(), null, null, null, null, null, null);
             if (call != null) {
-                call.enqueue(new Callback<Search>() {
-                    @Override
-                    public void onResponse(Call<Search> call, Response<Search> response) {
-                        if (listener != null) {
-                            listener.onSearch(query, response.body().tweets);
-                        }
+                try {
+                    Response<Search> response = call.execute();
+                    if (response != null) {
+                        listener.onSearch(query, response.body().tweets);
+                    } else {
+                        listener.onSearchFailure(query);
                     }
-
-                    @Override
-                    public void onFailure(Call<Search> call, Throwable t) {
-                        t.printStackTrace();
-                        if (listener != null) {
-                            listener.onSearchFailure(query);
-                        }
-                    }
-                });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    listener.onSearchFailure(query);
+                }
             }
         }
     }

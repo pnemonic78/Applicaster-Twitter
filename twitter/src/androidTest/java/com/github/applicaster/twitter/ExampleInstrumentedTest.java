@@ -47,7 +47,7 @@ public class ExampleInstrumentedTest {
 
             @Override
             public void onSearchFailure(String query) {
-                assertNull(query);
+                throw new AssertionError("blank query returns no results!");
             }
         });
 
@@ -60,13 +60,25 @@ public class ExampleInstrumentedTest {
 
             @Override
             public void onSearchFailure(String query) {
-                assertNull(query);
+                throw new AssertionError("blank query returns no results!");
             }
         });
     }
 
     @Test
     public void searchHello() {
-        // TODO implement me!
+        TwitterSearch.search("hello", new TwitterSearchListener() {
+            @Override
+            public void onSearch(String query, List<Tweet> tweets) {
+                assertEquals("hello", query);
+                assertNotNull(tweets);
+                assertFalse(tweets.isEmpty());
+            }
+
+            @Override
+            public void onSearchFailure(String query) {
+                assertEquals("hello", query);
+            }
+        });
     }
 }
