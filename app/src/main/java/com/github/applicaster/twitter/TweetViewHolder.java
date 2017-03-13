@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.github.applicaster.twitter.app.R;
 import com.squareup.picasso.Picasso;
-//import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.Tweet;
 
 /**
  * Tweet view holder.
@@ -26,9 +26,9 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         dateView = (TextView) itemView.findViewById(R.id.date);
     }
 
-//    public void bind(Tweet tweet) {
-//        Picasso.with(iconView.getContext()).load(tweet.user.profileImageUrl).into(iconView);
-//        tweetView.setText(tweet.text);
-//        dateView.setText(tweet.createdAt);
-//    }
+    public void bind(Tweet tweet) {
+        Picasso.with(iconView.getContext()).load(tweet.user.profileImageUrl).into(iconView);
+        tweetView.setText(tweet.text);
+        dateView.setText(tweet.createdAt);
+    }
 }

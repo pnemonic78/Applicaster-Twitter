@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -35,8 +35,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile group: 'com.squareup.picasso', name: 'picasso', version: '2.5.2'
 
-//    compile project(':twitter')
-//    compile('com.twitter.sdk.android:twitter-core:2.3.0@aar') {
-//        transitive = true;
-//    }
+    compile project(':twitter')
+    compile('com.twitter.sdk.android:twitter-core:2.3.0@aar') {
+        transitive = true;
+    }
 }

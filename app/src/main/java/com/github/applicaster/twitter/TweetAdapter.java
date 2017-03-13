@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.applicaster.twitter.app.R;
+import com.twitter.sdk.android.core.models.Tweet;
+
 import java.util.ArrayList;
 import java.util.List;
-
-//import com.twitter.sdk.android.core.models.Tweet;
 
 /**
  * Tweet list adapter.
@@ -16,20 +17,18 @@ import java.util.List;
  */
 public class TweetAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
-    //    private final List<Tweet> data = new ArrayList<>();
-    private final List<Object> data = new ArrayList<>();
+    private final List<Tweet> data = new ArrayList<>();
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//        View view = inflater.inflate(R.layout.tweet_list_item, parent, false);
-        View view = null;
+        View view = inflater.inflate(R.layout.tweet_list_item, parent, false);
         return new TweetViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-//        holder.bind(data.get(position));
+        holder.bind(data.get(position));
     }
 
     @Override
@@ -37,7 +36,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         return data.size();
     }
 
-    public void setData(List<Object> data) {
+    public void setData(List<Tweet> data) {
         this.data.clear();
         if (data != null) {
             this.data.addAll(data);
