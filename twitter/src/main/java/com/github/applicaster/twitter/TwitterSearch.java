@@ -14,7 +14,7 @@ import io.fabric.sdk.android.Fabric;
 public class TwitterSearch {
 
     public static void init(Context context) {
-        TwitterAuthConfig authConfig = new TwitterAuthConfig("consumerKey", "consumerSecret");
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(BuildConfig.TWITTER_KEY, BuildConfig.TWITTER_SECRET);
         Fabric.with(context, new TwitterCore(authConfig));
     }
 
