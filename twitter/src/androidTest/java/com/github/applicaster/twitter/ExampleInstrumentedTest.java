@@ -67,17 +67,23 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void searchHello() {
-        TwitterSearch.search("hello", new TwitterSearchListener() {
+        final String q = "hello";
+        TwitterSearch.search(q, new TwitterSearchListener() {
             @Override
             public void onSearch(String query, List<Tweet> tweets) {
-                assertEquals("hello", query);
+                assertEquals(q, query);
                 assertNotNull(tweets);
                 assertFalse(tweets.isEmpty());
+
+                String qLower = q.toLowerCase();
+                for (Tweet tweet : tweets) {
+                    assertTrue("should contain [" + qLower + "] but received [" + tweet.text + "]", tweet.text.toLowerCase().contains(qLower));
+                }
             }
 
             @Override
             public void onSearchFailure(String query) {
-                assertEquals("hello", query);
+                assertEquals(q, query);
             }
         });
     }

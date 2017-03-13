@@ -36,7 +36,8 @@ public class TwitterSearchTask extends AsyncTask<String, Void, List<Tweet>> {
         TwitterApiClient client = core.getApiClient();
         SearchService service = client.getSearchService();
         if (service != null) {
-            Call<Search> call = service.tweets(query, null, null, Locale.getDefault().toString(), null, null, null, null, null, null);
+            Locale locale = Locale.getDefault();
+            Call<Search> call = service.tweets(query, null, locale.getLanguage(), locale.toString(), null, null, null, null, null, null);
             if (call != null) {
                 try {
                     Response<Search> response = call.execute();
