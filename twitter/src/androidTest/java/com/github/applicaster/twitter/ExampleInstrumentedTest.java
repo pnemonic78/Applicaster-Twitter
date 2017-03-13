@@ -4,9 +4,13 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.twitter.sdk.android.core.models.Tweet;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +38,31 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void searchNone() {
-        // TODO implement me!
+        TwitterSearch.search(null, new TwitterSearchListener() {
+            @Override
+            public void onSearch(String query, List<Tweet> tweets) {
+                assertNull(query);
+                assertNull(tweets);
+            }
+
+            @Override
+            public void onSearchFailure(String query) {
+                assertNull(query);
+            }
+        });
+
+        TwitterSearch.search("", new TwitterSearchListener() {
+            @Override
+            public void onSearch(String query, List<Tweet> tweets) {
+                assertEquals("", query);
+                assertNull(tweets);
+            }
+
+            @Override
+            public void onSearchFailure(String query) {
+                assertNull(query);
+            }
+        });
     }
 
     @Test
